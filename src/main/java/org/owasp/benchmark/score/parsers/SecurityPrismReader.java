@@ -36,8 +36,8 @@ public class SecurityPrismReader extends Reader {
         if ( ruleid.endsWith(")") ) ruleid = ruleid.substring(0, ruleid.length() -2);
         else ruleid = ruleid.substring(0, ruleid.length() -1);
 
-        if ( testfile.startsWith( BenchmarkScore.BENCHMARKTESTNAME ) ) {
-            String testno = testfile.substring(BenchmarkScore.BENCHMARKTESTNAME.length());
+        if ( testfile.startsWith( BenchmarkScore.TESTCASENAME ) ) {
+            String testno = testfile.substring(BenchmarkScore.TESTCASENAME.length());
             if ( testno.endsWith( ".html" ) || testno.endsWith( ".java" )) {
                 testno = testno.substring(0, testno.length() -5 );
             } else if ( testno.endsWith( ".xml" ) ) {
@@ -72,6 +72,7 @@ public class SecurityPrismReader extends Reader {
       cwe = cwe - 45110000;
       if (cwe > 999) cwe = 0;
       if (cwe == 80) cwe = 79;
+      if (cwe == 9102 || cwe == 9103 || cwe == 9104) cwe = 89;
     } catch( NumberFormatException e ) {
       System.out.println( "> Transform error " + ruleid + ":: " + cwe );
     }
